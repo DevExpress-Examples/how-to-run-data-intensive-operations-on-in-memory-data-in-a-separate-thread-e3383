@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="LinqToObjectsDataSource.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:local="clr-namespace:LinqToObjectsDataSource"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <local:LinqToObjectsViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <dx:LinqToObjectsInstantFeedbackDataSource Name="linqInstantDataSource" ListSource="{Binding Path=ListSource}" />
+        <dxg:GridControl Name="grid" ItemsSource="{Binding ElementName=linqInstantDataSource, Path=Data}">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn x:Name="colOrderId" FieldName="OrderId" Header="ID" Width="60" MinWidth="60" AllowGrouping="False" />
+                <dxg:GridColumn x:Name="colCustomerName" FieldName="CustomerName" Width="200" />
+                <dxg:GridColumn x:Name="colOrderDate" FieldName="OrderDate" Width="100" AllowColumnFiltering="False">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="colProductName" FieldName="ProductName" Width="200" />
+                <dxg:GridColumn x:Name="colPrice" FieldName="Price" Width="60" />
+                <dxg:GridColumn x:Name="colQuantity" FieldName="Quantity" Width="60" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True" ShowTotalSummary="True" RowAnimationKind="None" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>
